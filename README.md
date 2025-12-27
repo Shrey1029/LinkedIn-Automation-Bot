@@ -36,6 +36,13 @@ This software is a Proof of Concept (PoC) designed to demonstrate technical capa
 
 ---
 
+### Core Components
+* The Brain (cmd/server): Orchestrates the concurrent Goroutines. It spins up the HTTP server and manages the communication between the UI and the Bot Engine via a thread-safe logging channel.
+
+* The Bot (internal/bot): Manages the browser lifecycle. It tracks state, handles DOM queries, and manages the JSON-based history file to prevent duplicate messaging.
+
+* The Hand (internal/human): A pure math package. It calculates trajectory points for mouse movement and handles "sleep" randomization to defeat heuristic analysis.
+
 ## 🏗️ Technical Architecture
 
 The project follows a modular **Clean Architecture** pattern to ensure maintainability and separation of concerns.
