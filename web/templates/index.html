@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>LinkedIn Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+</head>
+<body class="bg-gray-900 text-white font-mono h-screen flex flex-col p-6">
+    <header class="mb-6 border-b border-gray-700 pb-4 flex justify-between">
+        <h1 class="text-3xl font-bold text-blue-500">LinkedIn Stealth Automation</h1>
+        <div class="px-4 py-2 bg-gray-800 rounded border border-gray-600">
+            <span id="status-text" class="text-green-400 font-bold">READY</span>
+        </div>
+    </header>
+    <div class="flex-1 grid grid-cols-12 gap-6">
+        <div class="col-span-4 bg-gray-800 rounded-lg p-6 border border-gray-700 shadow-xl">
+            <h2 class="text-xl font-bold mb-4">Mission Control</h2>
+            <form hx-post="/start" hx-swap="none" class="flex flex-col gap-4">
+                <input type="text" name="query" value="Software Engineer" class="w-full bg-gray-900 border border-gray-600 rounded p-2">
+                <button type="submit" onclick="document.getElementById('status-text').innerText = 'RUNNING...'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded">LAUNCH BOT</button>
+            </form>
+            <form hx-post="/stop" hx-swap="none" class="mt-4">
+                <button class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded">STOP</button>
+            </form>
+        </div>
+        <div class="col-span-8 bg-black rounded-lg border border-gray-700 flex flex-col p-4">
+            <div hx-get="/logs" hx-trigger="every 1s" class="overflow-y-auto h-96 space-y-1"></div>
+        </div>
+    </div>
+</body>
+</html>
